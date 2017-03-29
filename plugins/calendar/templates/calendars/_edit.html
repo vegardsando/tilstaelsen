@@ -1,0 +1,107 @@
+{% extends "calendar/layouts/_layoutWithoutSettings.html" %}
+{% import "_includes/forms" as forms %}
+
+{% set selectedSubnavItem = "calendars" %}
+{% set saveShortcutRedirect = 'calendar/calendars/{handle}' %}
+{% set title = "solspace_calendar_calendars_title"|t({title: title}) %}
+
+{% set crumbs = [
+{ label: "solspace_calendar"|t, url: url('calendar') },
+{ label: "calendars"|t, url: url('calendar/calendars') },
+{ label: calendar.name ? calendar.name : "new_calendar"|t, url: '' },
+] %}
+
+{% set fullPageForm %}
+    <form method="post" accept-charset="UTF-8" data-saveshortcut="1">
+{% endset %}
+
+{% block saveButton %}
+    <div class="buttons">
+        <div class="btngroup submit">
+            <input type="submit" class="btn submit" value="{{ 'calendar_save'|t }}">
+
+            <div class="btn submit menubtn"></div>
+            <div class="menu">
+                <ul>
+                    <li>
+                        <a class="formsubmit" data-redirect="{{ continueEditingUrl }}">
+                            {{ "save_and_continue_editing"|t }}
+                            <span class="shortcut">⌘S</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="formsubmit" data-redirect="{{ url('calendar/calendars/new') }}">
+                            {{ "save_and_add_another"|t }}
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block main %}
+    <div class="pane">
+        <div id="content" class="content">
+            <div class="body">
+
+                <input type="hidden" name="action" value="calendar/calendars/saveCalendar">
+                <input type="hidden" name="redirect" value="calendar/calendars">
+                {% if calendar.id %}<input type="hidden" name="calendarId" value="{{ calendar.id }}">{% endif %}
+                {{ getCsrfInput() }}
+
+                {{ forms.textField({
+                    first: true,
+                    label: "calendar_name"|t,
+                    instructions: "calendar_name_instructions"|t,
+                    id: 'name',
+                    name: 'name',
+                    value: calendar.name,
+                    errors: calendar.getErrors('name'),
+                    autofocus: true,
+                    required: true,
+                    translatable: true
+                }) }}
+
+                {{ forms.textField({
+                    label: "calendar_handle"|t,
+                    instructions: "calendar_handle_instructions"|t,
+                    id: 'handle',
+                    class: 'code',
+                    name: 'handle',
+                    value: calendar.handle,
+                    errors: calendar.getErrors('handle'),
+                    required: true
+                }) }}
+
+                {{ forms.textareaField({
+                    label: "calendar_description"|t,
+                    instructions: "calendar_description_instructions"|t,
+                    id: 'description',
+                    name: 'description',
+                    value: calendar.description,
+                    errors: calendar.getErrors('description'),
+                    required: false
+                }) }}
+
+                <hr>
+
+                {{ forms.colorField({
+                    label: "calendar_color"|t,
+                    instructions: "calendar_color_instructions"|t,
+                    id: 'color',
+                    name: 'color',
+                    value: calendar.color,
+                    errors: calendar.getErrors('color'),
+                    required: true
+                }) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% set js %}
+    {% if not calendar.handle %}new Craft.HandleGenerator('#name', '#handle');{% endif %}
+{% endset %}
+{% includeJs js %}

@@ -1,0 +1,109 @@
+<h3>Mini Calendar</h3>
+
+{% set targetDate = "today" %}
+
+{% if seg1 in ["month", "week", "day"] %}
+    {% if seg2 == "calendar" %}
+        {% if seg4 is not empty %}
+            {% set targetDate = seg4~"-"~seg5~"-01" %}
+        {% endif %}
+    {% elseif seg2 is not empty %}
+        {% set targetDate = seg2~"-"~seg3~"-01" %}
+    {% endif %}
+{% endif %}
+
+{% set month = craft.calendar.month({
+    date: targetDate
+}) %}
+
+<div id="mini_calendar">
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th colspan="1">
+                {% if seg1 != "calendars" %}
+                    <a id="mini_calendar_prev_month" href="{{ siteUrl }}demo/month/{{ month.previousDate.format('Y/m') }}/">&larr;</a>
+                {% endif %}
+            </th>
+            <th colspan="5">
+                <a href="{{ siteUrl }}demo/month/{{ month.date.format('Y/m') }}/">{{ month.date.format('F Y') }}</a>
+            </th>
+            <th colspan="1">
+                {% if seg1 != "calendars" %}
+                <a id="mini_calendar_next_month" href="{{ siteUrl }}demo/month/{{ month.nextDate.format('Y/m') }}/"> &rarr;</a>
+                {% endif %}
+            </th>
+        </tr>
+        <tr class="mini_calendar_days">
+            {% for day in month|first %}
+                <th>{{ day.date.format('D')|first }}</th>
+            {% endfor %}
+        </tr>
+        </thead>
+        <tbody>
+            {% for week in month %}
+                <tr>
+                    {% for day in week %}
+                        <td class="
+                            {{ month.containsDate(day.date) ? "mini_calendar_pad"}}
+                            {{ day.eventCount ? "has_events" }}
+                            {{ day.date.isToday ? "today" }}
+                        ">
+                            <div class="mini_calendar_date">
+                                {% if month.containsDate(day.date) %}
+                                    {% if day.eventCount %}
+                                        <a href="{{ siteUrl }}demo/day/{{ day.date.format('Y/m/d') }}">
+                                    {% endif %}
+
+                                    {{ day.date.format('j') }}
+
+                                    {% if day.eventCount %}
+                                        </a>
+                                    {% endif %}
+                                {% else %}
+                                    <strong class="middot">&middot;</strong>
+                                {% endif %}
+                            </div>
+                        </td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<h3>
+    {% if seg1 in ["month", "week", "day"] %}
+	    Filter by Calendar
+    {% else %}
+	    Calendars
+    {% endif %}
+</h3>
+<div class="list-group">
+    {% set calendars = craft.calendar.calendars({
+        limit: 10,
+        order: "name",
+        sort: "asc"
+    }) %}
+
+    {% for calendar in calendars %}
+        {% if seg1 in ["month", "week", "day"] %}
+            {% set urlPart = seg1~"/calendar" %}
+        {% else %}
+            {% set urlPart = "calendars" %}
+        {% endif %}
+
+        {% if seg2 == calendar.handle or seg3 == calendar.handle %}
+            {% set style = "background-color: "~calendar.lighterColor~"; border-left: 5px solid "~calendar.color~"; color: "~calendar.contrastColor~";" %}
+        {% else %}
+            {% set style = "color: "~calendar.color~";" %}
+        {% endif %}
+
+        <a href="{{ siteUrl }}demo/{{ urlPart }}/{{ calendar.handle }}"
+           class="list-group-item" style="{{ style }}">
+            <span class="glyphicon glyphicon-calendar" style="color: {{ calendar.color }};" aria-hidden="true"></span>&nbsp;
+            {{ calendar.name }}
+        </a>
+    {% endfor %}
+
+</div>

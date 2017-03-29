@@ -1,0 +1,12 @@
+@import "_inc/mixins";
+@import "_inc/variables";
+
+::-moz-selection {
+    background: $selectfarge;
+	color: set-dynamic-color($selectfarge);
+}
+
+::selection {
+    background: $selectfarge;
+	color: set-dynamic-color($selectfarge);
+}

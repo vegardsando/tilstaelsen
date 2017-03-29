@@ -1,0 +1,32 @@
+{% import "_includes/forms" as forms %}
+
+
+{{ forms.textField({
+    label: "calendar_widget_title"|t,
+    instructions: "calendar_widget_title_instructions"|t,
+    id: 'title',
+    name: 'title',
+    value: settings.title,
+    errors: settings.getErrors('title')
+}) }}
+
+{{ forms.selectField({
+    label: "calendar_widget_view"|t,
+    instructions: "calendar_widget_view_instructions"|t,
+    id: 'view',
+    name: 'view',
+    options: {month: "Month", agendaWeek: "Week", agendaDay: "Day"},
+    value: settings.view,
+    errors: settings.getErrors('view')
+}) }}
+
+
+{{ forms.checkboxSelectField({
+    label: "calendar_widget_calendars"|t,
+    instructions: "calendar_widget_calendars_instructions"|t,
+    id: 'calendars',
+    name: 'calendars',
+    options: calendars,
+    values: settings.calendars,
+    errors: settings.getErrors('calendars')
+}) }}

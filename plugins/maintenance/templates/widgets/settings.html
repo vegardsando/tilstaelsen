@@ -1,0 +1,28 @@
+{% import '_includes/forms' as forms %}
+
+{{ forms.textField({
+    label: 'Title'|t,
+    id: 'title',
+    name: 'title',
+    value: settings.title,
+    required: true,
+    errors: settings.getErrors('title')
+}) }}
+
+{{ forms.checkboxField({
+    label: 'Messages without a maintenance announcement'|t,
+    id: 'simpleNote',
+    name: 'simpleNote',
+    checked: settings.simpleNote,
+    errors: settings.getErrors('simpleNote')
+}) }}
+
+{{ forms.checkboxSelectField({
+    label: 'Maintenance Status'|t,
+    id: 'statuses',
+    name: 'statuses',
+    options: statuses,
+    showAllOption: false,
+    values: settings.statuses,
+    errors: settings.getErrors('statuses')
+}) }}

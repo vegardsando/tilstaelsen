@@ -1,0 +1,30 @@
+{% extends "_admin/_craftBase" %}
+{% set bodyClass = 'message' %}
+{% set title = "Service Unavailable"|t %}
+{% set announcement = craft.maintenance ? craft.maintenance.getAnnouncement() : null %}
+
+{% set logo = craft.rebrand.isLogoUploaded ? true : false %}
+{% set maintenance = announcement and announcement.blockSite ? true : false %}
+
+{% block message %}
+<div class="{{ maintenance ? 'maintenance'}} {{ logo ? 'logo'}} pane" id="message">
+	{% if logo %}
+	<div class="logo-wrapper"><img id="logo" src="{{ craft.rebrand.logo.url }}" /></div>
+	{% endif %}
+	{% if maintenance %}
+			<div class="maintenance-heading">Vedlikehold pågår.</div>
+			<p>{{ announcement.message }}</p>
+			{% set startFormat = announcement.startDate | date("d.m") == now | date("d.m") ? "H:i" : "d.m H:i" %}
+			{% set difference = date( announcement.startDate).diff(date(announcement.endDate)) %}
+			<small>Vedlikehold startet {{ announcement.startDate | date(startFormat) }}{{ announcement.endDate ? ', planlagt varighet er ' ~ (difference.h ? difference.h ~ ' time' ~ (difference.h > 1 ? 'r') ~ (difference.i ? ' og ')) ~ (difference.i ? difference.i ~ ' min')}}</small>
+		</div>
+	{% else %}
+			<h2>{{ title }}</h2>
+			{% if message and message is not empty %}
+				{% filter md %}{{ message }}{% endfilter %}
+			{% else %}
+				<p>{{ "Our site is temporarily unavailable. Please try again later."|t }}</p>
+			{% endif %}
+	{% endif %}
+</div>
+{% endblock %}

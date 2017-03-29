@@ -1,0 +1,21 @@
+{% set seg1 = craft.request.segment(2) %}
+{% set seg2 = craft.request.segment(3) %}
+{% set seg3 = craft.request.segment(4) %}
+
+{% if seg2 == "event" %}
+    {% set options = {
+        id: seg3
+    } %}
+{% elseif seg2 == "calendar" %}
+    {% set options = {
+        calendarId: seg3
+    } %}
+{% endif %}
+
+{% set events = craft.calendar.events(options|merge({
+    dateRangeStart: "1 year ago",
+    dateRangeEnd: "5 years",
+    loadOccurrences: false
+})) %}
+
+{{ craft.calendar.export(events) }}

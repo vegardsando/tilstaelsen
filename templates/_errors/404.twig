@@ -1,0 +1,31 @@
+{#
+ # 404 template
+ # ------------
+ #
+ # This template is loaded whenever Craft cannot figure out how to
+ # respond to an incoming request. No setup is involved to get your
+ # 404 page working; you just need to call it 404.html and put it
+ # at the root of your craft/templates/ folder.
+ #
+ # You can also create 400.html, 403.html, 500.html, and 503.html
+ # templates if you’d like. If Craft can’t find an error template
+ # to match the error code, it will just use the one in
+ # craft/app/templates/ instead.
+ #
+ # See this page for more details on how Craft routes requests:
+ # http://buildwithcraft.com/docs/routing
+ #}
+
+{% do craft.obsoleteRedirect.check() %}
+
+{% extends "_layout" %}
+{% set title = "404" %}
+{% set seoTitle = seomaticMeta is defined ? seomaticMeta | merge({ seoTitle: "404" }) %}
+
+{% block content %}
+<section style="text-align: center;">
+	<h2 style="font-size: 10em; margin: 0;" class="strong color-orange bold"><span class="error-icon">?</span><span class="error-icon delay">!</h2>
+	<h1>{{ "Siden ble ikke funnet" | t }}</h1>
+	<p>{{ "Det kan være feil adresse eller så eksisterer ikke siden lengre." | t }}</p>
+</section>
+{% endblock %}

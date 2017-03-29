@@ -1,0 +1,38 @@
+{% set midnight = now|date_modify("+1 day")|date("Y-m-d") ~ ' 00:00' %}
+{% set cdnUrl = craft.config.cdnUrl ?? siteUrl %}
+<!doctype html>
+{% if craft.config.env == 'PROD' %}{% include '_admin/_mustasj_logo' %}{% endif %}
+<html class="no-js" lang="{{craft.locale}}">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimal-ui">
+
+		{% hook 'seomaticRender' %}
+		{% include "_admin/_ekstraHead" %}
+		{% if craft.request.isLivePreview %}
+		<!-- Åpne alle linker i nytt vindu hvis vi er i previewmodus -->
+		<script type="text/javascript">
+			var links = document.links;
+			for (var i = 0; i < links.length; i++) {
+				links[i].target = "_blank";
+			}
+		</script>
+		{% endif %}
+	</head>
+	<body class="{{ bodyClass is defined ? bodyClass }}">
+	{% include '_admin/_maintenanceBanner' %}
+		<!--[if lt IE 7]>
+			<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+		<![endif]-->
+		{% block content %}
+			<p>Du mangler innhold</p>
+		{% endblock %}
+	<!--[if lt IE 9]> <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script> <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script> <![endif]-->
+		<script>
+			loadCSS("{{cdnUrl}}dist/{{ rev('css/main.css') |default('')}}");
+			requirejs(["main"]);
+		</script>
+		<noscript><link rel="stylesheet" href="{{cdnUrl}}dist/{{ rev('css/main.css') }}" /></noscript>
+	</body>
+</html>

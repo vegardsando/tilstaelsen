@@ -1,0 +1,39 @@
+{% extends "calendar/layouts/_settings" %}
+
+{% import "_includes/forms" as forms %}
+
+{% block content %}
+
+    <h2>{{ "ics_settings"|t }}</h2>
+
+    <form action="" method="post" accept-charset="UTF-8">
+        <input type="hidden" name="action" value="calendar/settings/saveSettings">
+        <input type="hidden" name="redirect" value="calendar/settings/ics">
+        {{ getCsrfInput() }}
+
+
+        {{ forms.selectField({
+            label: "settings_ics_description"|t,
+            instructions: "settings_ics_description_instructions"|t,
+            id: 'descriptionFieldHandle',
+            name: 'settings[descriptionFieldHandle]',
+            options: settings.descriptionFieldHandles,
+            value: settings.descriptionFieldHandle,
+            errors: settings.getErrors('descriptionFieldHandle')
+        }) }}
+
+
+        {{ forms.selectField({
+            label: "settings_ics_location"|t,
+            instructions: "settings_ics_location_instructions"|t,
+            id: 'locationFieldHandle',
+            name: 'settings[locationFieldHandle]',
+            options: settings.locationFieldHandles,
+            value: settings.locationFieldHandle,
+            errors: settings.getErrors('locationFieldHandle')
+        }) }}
+
+        <input type="submit" class="btn submit" value="{{ "Save"|t }}">
+    </form>
+
+{% endblock %}

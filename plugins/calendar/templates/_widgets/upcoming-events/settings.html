@@ -1,0 +1,30 @@
+{% import "_includes/forms" as forms %}
+
+
+{{ forms.textField({
+    label: "calendar_widget_title"|t,
+    instructions: "calendar_widget_title_instructions"|t,
+    id: 'title',
+    name: 'title',
+    value: settings.title,
+    errors: settings.getErrors('title')
+}) }}
+
+{{ forms.checkboxSelectField({
+    label: "calendar_widget_calendars"|t,
+    instructions: "calendar_widget_calendars_instructions"|t,
+    id: 'calendars',
+    name: 'calendars',
+    options: calendars,
+    values: settings.calendars,
+    errors: settings.getErrors('calendars')
+}) }}
+
+{{ forms.textField({
+    label: "event_limit"|t,
+    id: 'limit',
+    name: 'limit',
+    value: settings.limit,
+    size: 2,
+    errors: settings.getErrors('limit')
+}) }}

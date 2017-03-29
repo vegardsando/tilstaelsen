@@ -1,0 +1,114 @@
+{%- includecssresource "css/craft.css" first -%}
+
+{% set siteName = craft.app.getSiteName() -%}
+{% set docTitle = docTitle is defined ? docTitle : title|striptags -%}
+{% set bodyClass = (bodyClass ? bodyClass~' ' : '') ~ craft.i18n.getLocaleData().getOrientation() -%}
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+	{% block head %}
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta charset="utf-8">
+	<title>{{ docTitle ~ (docTitle and siteName ? ' - ') ~ siteName }}</title>
+	{{ getHeadHtml() }}
+	{% include "_admin/_favicon" %}
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<script type="text/javascript">
+		// Fix for Firefox autofocus CSS bug
+		// See: http://stackoverflow.com/questions/18943276/html-5-autofocus-messes-up-css-loading/18945951#18945951
+	</script>
+	{% endblock %}
+	<style>
+		@font-face { font-family: 'Craft'; src: url("/admin/resources/fonts/Craft.eot?x=eNS1HMJQR"); src: url("/admin/resources/fonts/Craft.eot?#iefix&x=eNS1HMJQR") format("embedded-opentype"), url("/admin/resources/fonts/Craft.woff?d=1453217565") format("woff"), url("/admin/resources/fonts/Craft.ttf?x=eNS1HMJQR") format("truetype"), url("/admin/resources/fonts/Craft.svg#Craft?x=eNS1HMJQR") format("svg"); font-weight: normal; font-style: normal; }
+
+		#logo {
+			display: block;
+			margin: 0 auto;
+			max-width: 100%;
+			max-height: 100%;
+		}
+
+		.logo-wrapper {
+			position: absolute;
+			bottom: 100%;
+			margin-bottom: 30px;
+			width: 100%;
+			left: 0;
+			right: 0;
+		}
+
+		.logo > *:nth-child(2) {
+			margin-top: 0;
+		}
+
+		.maintenance {
+			padding-top: 60px;
+		}
+
+		small {
+			font-size: 11px;
+			color: #8f98a3;
+			display: block;
+		}
+
+		.maintenance-heading {
+			background: #da5a47;
+			padding: 15px 0;
+			text-align: center;
+			border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+			color: #fff;
+			position: absolute;
+			left: 0;
+			top: 0;
+			width: 100%;
+			border-top-left-radius: 4px;
+			border-top-right-radius: 4px;
+		}
+
+		.maintenance-heading:before {
+	    font-family: 'Craft';
+	    speak: none;
+	    -webkit-font-feature-settings: "liga", "dlig";
+	    -moz-font-feature-settings: "liga=1, dlig=1";
+	    -moz-font-feature-settings: "liga", "dlig";
+	    -ms-font-feature-settings: "liga", "dlig";
+	    -o-font-feature-settings: "liga", "dlig";
+	    font-feature-settings: "liga", "dlig";
+	    text-rendering: optimizeLegibility;
+	    font-weight: normal;
+	    font-variant: normal;
+	    text-transform: none;
+	    line-height: 1;
+	    direction: ltr;
+	    -webkit-font-smoothing: antialiased;
+	    -moz-osx-font-smoothing: grayscale;
+	    display: inline-block;
+	    text-align: center;
+	    font-style: normal;
+	    vertical-align: middle;
+	    word-wrap: normal !important;
+	    -webkit-user-select: none;
+	    -moz-user-select: none;
+	    -ms-user-select: none;
+	    content: 'alert';
+	    font-size: 16px;
+		margin-right: 5px;
+	</style>
+</head>
+<body class="{{ bodyClass }}">
+	{% block body %}
+		<div class="message-container">
+			{% block message %}{% endblock %}
+		</div>
+	{% endblock %}
+
+	{% block foot %}
+		<script type="text/javascript">
+			var message = document.getElementById('message'),
+				margin = -Math.round(message.offsetHeight / 2);
+			message.setAttribute('style', 'margin-top: '+margin+'px !important;');
+		</script>
+	{% endblock %}
+</body>
+</html>

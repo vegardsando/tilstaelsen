@@ -1,0 +1,59 @@
+{% extends "analytics/_layouts/tests" %}
+{% import "_includes/forms" as forms %}
+{% import "analytics/tests/_includes/macros" as macros %}
+
+{% set selectedTab = 'reportWidgets' %}
+
+{% set content %}
+
+	{% includejs %}
+		window.csrfTokenName = "{{ craft.config.csrfTokenName|e('js') }}";
+		window.csrfTokenValue = "{{ craft.request.csrfToken|e('js') }}";
+
+		var AnalyticsChartLanguage = "{{ "analyticsChartLanguage"|t }}";
+	{% endincludejs %}
+
+	{{ macros.testReportWidget("Area", {
+		chart: 'area',
+		period: 'month',
+		options: {
+			metric: 'ga:users'
+		}
+	}) }}
+
+	{{ macros.testReportWidget("Counter", {
+		chart: 'counter',
+		period: 'month',
+		options: {
+			metric: 'ga:users'
+		}
+	}) }}
+
+	{{ macros.testReportWidget("Pie", {
+		chart: 'pie',
+		period: 'month',
+		options: {
+			dimension: 'ga:userType',
+			metric: 'ga:users'
+		}
+	}) }}
+
+	{{ macros.testReportWidget("Table", {
+		chart: 'table',
+		period: 'month',
+		options: {
+			dimension: 'ga:userType',
+			metric: 'ga:users'
+		}
+	}) }}
+
+	{{ macros.testReportWidget("Geo", {
+		chart: 'geo',
+		period: 'month',
+		options: {
+			dimension: 'ga:subContinent',
+			metric: 'ga:users'
+		}
+	}) }}
+
+{% endset %}

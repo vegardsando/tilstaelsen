@@ -1,0 +1,6 @@
+{% if currentUser.can('calendar-settings') %}
+    {% redirect 'calendar/settings/general' %}
+{% endif %}
+
+{% extends "403" %}
+{% set message = "no_calendar_setting_permissions"|t %}

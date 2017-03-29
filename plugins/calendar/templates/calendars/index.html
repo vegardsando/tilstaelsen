@@ -1,0 +1,62 @@
+{% extends "calendar/layouts/_calendarsLayout" %}
+
+{% set selectedSubnavItem = "calendars" %}
+{% set title = "solspace_calendar_calendars"|t %}
+
+{% set content %}
+    <div id="nocalendars"{% if calendars %} class="hidden"{% endif %}>
+        <p>{{ "no_calendars_present"|t }}</p>
+    </div>
+
+    {% if calendars|length %}
+        <table id="calendars" class="data fullwidth collapsible">
+            <thead>
+            <th scope="col">{{ "calendar_name"|t }}</th>
+            <th scope="col">{{ "calendar_handle"|t }}</th>
+            <th scope="col">{{ "calendar_description"|t }}</th>
+            <td class="thin"></td>
+            </thead>
+            <tbody>
+            {% for calendar in calendars %}
+                <tr data-id="{{ calendar.id }}" data-name="{{ calendar.name|t }}">
+                    <th scope="row" data-title="{{ 'calendar_name'|t }}">
+                        <span class="color-indicator" style="background-color: {{ calendar.color }};"></span>
+                        {% if currentUser.can("calendar-editCalendars") %}
+                            <a href="{{ url('calendar/calendars/' ~ calendar.handle) }}">
+                                {{ calendar.name }}
+                            </a>
+                        {% else %}
+                            {{ calendar.name }}
+                        {% endif %}
+                    </th>
+                    <td data-title="{{ 'calendar_handle'|t }}">
+                        <code>
+                            {{ calendar.handle }}
+                        </code>
+                    </td>
+                    <td style="width: 50%;">
+                        {{ calendar.description }}
+                    </td>
+                    <td class="thin">
+                        {% if currentUser.can("calendar-deleteCalendars") %}
+                            <a class="delete icon" title="{{ 'calendar_delete'|t }}" role="button"></a>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+{% endset %}
+
+
+{% set js %}
+    var adminTable = new Craft.AdminTable({
+    tableSelector: '#calendars',
+    noObjectsSelector: '#nocalendars',
+    newObjectBtnSelector: '#newcalendarcontainer',
+    deleteAction: 'calendar/calendars/delete',
+    confirmDeleteMessage: '{{ "calendar_delete_confirmation"|t }}'
+    });
+{% endset %}
+{% includeJs js %}

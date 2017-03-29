@@ -1,0 +1,44 @@
+{% extends "calendar/layouts/_settings" %}
+
+{% import "_includes/forms" as forms %}
+
+{% block content %}
+
+    <h2>{{ "general_settings"|t }}</h2>
+
+    <form action="" method="post" accept-charset="UTF-8">
+        <input type="hidden" name="action" value="calendar/settings/saveSettings">
+        <input type="hidden" name="redirect" value="calendar/settings/general">
+        {{ getCsrfInput() }}
+
+        {{ forms.lightswitchField({
+            label: "settings_display_mini_cal"|t,
+            instructions: "settings_display_mini_cal_instructions"|t,
+            id: 'showMiniCal',
+            name: 'settings[showMiniCal]',
+            on: settings.showMiniCal,
+            errors: settings.getErrors('showMiniCal')
+        }) }}
+
+        {{ forms.lightswitchField({
+            label: "settings_display_disabled_events"|t,
+            instructions: "settings_display_disabled_events_instructions"|t,
+            id: 'showDisabledEvents',
+            name: 'settings[showDisabledEvents]',
+            on: settings.showDisabledEvents,
+            errors: settings.getErrors('showDisabledEvents')
+        }) }}
+
+        {{ forms.lightswitchField({
+            label: "settings_hide_demo_banner"|t,
+            instructions: "settings_hide_demo_banner_instructions"|t,
+            id: 'demoBannerDisabled',
+            name: 'settings[demoBannerDisabled]',
+            on: settings.demoBannerDisabled,
+            errors: settings.getErrors('demoBannerDisabled')
+        }) }}
+
+        <input type="submit" class="btn submit" value="{{ "Save"|t }}">
+    </form>
+
+{% endblock %}

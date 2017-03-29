@@ -1,0 +1,56 @@
+{% extends "calendar/layouts/_settings" %}
+
+{% import "_includes/forms" as forms %}
+
+{% block content %}
+
+    <h2>{{ "event_settings"|t }}</h2>
+
+    <form action="" method="post" accept-charset="UTF-8">
+        <input type="hidden" name="action" value="calendar/settings/saveSettings">
+        <input type="hidden" name="redirect" value="calendar/settings/events">
+        {{ getCsrfInput() }}
+
+
+        {{ forms.selectField({
+            label: "settings_event_duration"|t,
+            instructions: "settings_event_duration_instructions"|t,
+            id: 'eventDuration',
+            name: 'settings[eventDuration]',
+            options: settings.eventDurations,
+            value: settings.eventDuration,
+            errors: settings.getErrors('eventDuration')
+        }) }}
+
+        {{ forms.selectField({
+            label: "settings_time_interval"|t,
+            instructions: "settings_time_interval_instructions"|t,
+            name: 'settings[timeInterval]',
+            options: settings.timeIntervals,
+            value: settings.timeInterval,
+            errors: settings.getErrors('timeInterval')
+        }) }}
+
+        {{ forms.lightswitchField({
+            label: "settings_all_day_default"|t,
+            instructions: "settings_all_day_default_instructions"|t,
+            id: 'allDay',
+            name: 'settings[allDay]',
+            on: settings.allDay,
+            errors: settings.getErrors('allDay')
+        }) }}
+
+        {{ forms.selectField({
+            label: "settings_date_overlap_threshold"|t,
+            instructions: "settings_date_overlap_threshold_instructions"|t,
+            id: 'overlapThreshold',
+            name: 'settings[overlapThreshold]',
+            options: settings.overlapThresholds,
+            value: settings.overlapThreshold,
+            errors: settings.getErrors('overlapThreshold')
+        }) }}
+
+        <input type="submit" class="btn submit" value="{{ "Save"|t }}">
+    </form>
+
+{% endblock %}

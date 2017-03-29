@@ -1,0 +1,26 @@
+{% extends "calendar/layouts/_settings" %}
+{% import "_includes/forms" as forms %}
+
+{% set selectedSubnavItem = "settings" %}
+{% set title = "Solspace Calendar: Demo Templates" %}
+
+{% includeCssFile resourceUrl('calendar/css/code-pack.css') %}
+{% includeJsFile resourceUrl('calendar/js/code-pack.js') %}
+
+{% block content %}
+
+    <h2>{{ "demo_templates"|t }}</h2>
+
+    <div>
+        {% set stats = {
+            templates: codePack.templates.contents.fileCount,
+            assets: codePack.assets.contents.fileCount
+        } %}
+
+        {{ "demo_templates_installed"|t(stats)|raw }}
+    </div>
+    <div>
+        {{ "view_demo_templates"|t({link: (siteUrl ~ prefix ~ 'demo/')})|raw }}
+    </div>
+
+{% endblock %}

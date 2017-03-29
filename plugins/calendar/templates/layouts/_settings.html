@@ -1,0 +1,32 @@
+{% extends "calendar/layouts/_layoutWithoutSettings" %}
+
+{% set selectedSubnavItem = 'settings' %}
+
+{% set title = "Calendar Settings"|t %}
+
+{% set navItems = {
+'hd': { heading: "settings"|t },
+'license': { title: "license"|t },
+'general': { title: "general_settings"|t },
+'events': { title: "event_settings"|t },
+'ics': {title: 'ics_settings'|t},
+'field-layout': {title: 'field_layout'|t},
+'demo-templates': {title: 'demo_templates'|t},
+} %}
+
+{% set selectedItem = craft.request.getSegment(3)|default %}
+{% set docTitle = navItems[selectedItem].title~' - '~title %}
+
+{% block sidebar %}
+    <nav>
+        <ul>
+            {% for id, item in navItems %}
+                {% if item.heading is defined %}
+                    <li class="heading"><span>{{ item.heading }}</span></li>
+                {% else %}
+                    <li><a href="{{ url('calendar/settings/'~id) }}"{% if id == selectedItem %} class="sel"{% endif %}>{{ item.title }}</a></li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </nav>
+{% endblock %}

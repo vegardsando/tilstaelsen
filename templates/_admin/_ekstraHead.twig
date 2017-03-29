@@ -1,0 +1,34 @@
+{# her bruker vi teknikker for dns-prefetch  #}
+{% include "_admin/_dns-prefetch" %}
+
+{% if not craft.request.isLivePreview %}<style>body { opacity: 0; }</style>{% endif %}
+<style>{{ craft.inlin.er('/dist/' ~ rev('css/initial.css')) | raw }}</style>
+<noscript><style>body{ opacity: 1; }</style></noscript>
+<script>
+{{ craft.inlin.er('/dist/' ~ rev('js/initial.js')) | default('') | raw }}
+requirejs.config({
+    paths: {
+        jquery: ["//cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min", "/dist/js/vendor/jquery"],
+		admin: "/dist/admin/admin.min",
+		modenizer: "/dist/js/vendor/modernizr",
+        main: "/dist/{{ rev('js/main.js') | replace({'.js': ''}) | default('') }}",
+    },
+    shim: {
+        'main': ["jquery", "modenizer"],
+		'admin': ["jquery"]
+    }
+});
+</script>
+
+{% include "_admin/_favicon" %}
+
+{% if (craft.config.devMode or currentUser.admin ) and not craft.request.isLivePreview %}
+	{# Denne må være over main.js, kan tryne om ikke #}
+	<script>
+		var ENV = '{{craft.config.env}}',
+			adminplacement = 'bottom',
+			adminUser = {{ (currentUser.admin ?? null) ? 'true' : 'false' }};
+
+		requirejs(["admin"]);
+	</script>
+{% endif %}

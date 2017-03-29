@@ -1,0 +1,24 @@
+{% extends "calendar/layouts/_settings" %}
+
+{% import "_includes/forms" as forms %}
+
+{% block content %}
+
+    <h2>{{ "field_layout"|t }}</h2>
+
+    <form action="" method="post" accept-charset="UTF-8">
+        <input type="hidden" name="action" value="calendar/settings/saveSettings">
+        <input type="hidden" name="redirect" value="calendar/settings/field-layout">
+        <input type="hidden" name="update_layout" value="1">
+        {{ getCsrfInput() }}
+
+
+        {% include "_includes/fieldlayoutdesigner" with {
+        fieldLayout: settings.getFieldLayout()
+        } only %}
+
+
+        <input type="submit" class="btn submit" value="{{ "Save"|t }}">
+    </form>
+
+{% endblock %}

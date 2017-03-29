@@ -1,0 +1,6 @@
+# Erstatt dette med innholdet som er under 'FORGE CONFIG (DOT NOT REMOVE!)' nr 2 i nginx-config på Forge
+# MUSTASJ OPPSETT
+access_log off;
+error_log  /var/log/nginx/{domain}-error.log error;
+
+include /home/forge/{domain}/.forge/mustasj.conf;

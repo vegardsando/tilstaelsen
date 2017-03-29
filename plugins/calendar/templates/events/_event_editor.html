@@ -1,0 +1,13 @@
+{{ forms.textField({
+    label: "event_title"|t,
+    id: 'title',
+    name: 'title',
+    locale: event.locale,
+    value: event.title,
+    errors: event.getErrors('title'),
+    first: true,
+    autofocus: true,
+    required: true
+}) }}
+
+{% include "calendar/field/_event" %}
