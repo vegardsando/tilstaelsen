@@ -16,7 +16,7 @@ $customDbConfig = array(
 		'server' 	=> 'localhost',
 		'user' 		=> 'root',
 		'password' 	=> 'root',
-		'database' 	=> '_standard_craft'
+		'database' 	=> 'tilstaelsen_craft'
 	),
 	'DEV' => array(
 		'server' 	=> '10.0.0.14',
