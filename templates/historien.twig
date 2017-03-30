@@ -1,0 +1,36 @@
+{% extends "_layout" %}
+{% set bodyClass = "historien" %}
+
+{% block content %}
+	{# {% cache until midnight %}{% minify %} #}
+
+	<section class="historien-wrapper row">
+
+		<article class="historien-blokk bilde bilde-left text">
+			<img src="/static/img/Nidarvoll_01.jpg">
+			<div class="bildetext">
+				<p>11.September 1976 ble Sigrid Heggheim (20) fra Jølster funnet drept på et jorde på Nidarvoll i Trondheim. Sigrid var ny i  i byen og ble sist sett på Studentersamfundet kvelden 4. september.</p>
+			</div>
+		</article>
+
+		<article class="historien-blokk bilde bilde-left text">
+			<img src="/static/img/Stavne_sletta_03.jpg">
+			<div class="bildetext">
+				<p>06.Oktober 1977 ble Torunn Finstad (20) fra Kongsberg funnet drept ved Stavne bru i Trondheim. Likheten til drapet på Sigrid Heggheim elleve måneder tidligere var så mange at politiet mente at de måtte være samme gjerningsmann.</p>
+			</div>
+		</article>
+
+		<article class="historien-blokk bilde bilde-right text">
+			<img src="/static/img/Drapsmannen_16.jpg">
+			<div class="bildetext">
+				<p>Tor Hepsø var 38 år i 1976. Han var utdannet styrmann og hadde jobbet i utenriksfart fra slutten av 60-tallet. I 1973 begynte han å jobbe på oljeplattformen Nordskald. Der fikk han etterhvert stilling som kontrollromsoperatør og hadde ansvar for stabiliteten på plattformen. Det var her han jobbet da drapene på de unge studentene Sigrid og Torunn fant sted. Kripos avdekket at Hepsø hadde friturnus da begge drapene ble begått. I konklusjonen som Kriposetterforsker Asbjørn Hansen skrev etter å ha undersøkt om Hepsøs tilståelse kunne være sann står det:  Ut fra den etterforskning vi objektivet har gjennomført, kan vi ikke bevise at Tor Hepsø har begått drapene på Sigrid Heggheim og Torunn Finstad  i henholdsvis 1976 og 1977, slik han har tilstått. Det vi med sikkerhet kan si er at vi ikke har funnet noe som tyder på det motsatte- at han ikke kan ha drept dem.</p>
+			</div>
+		</article>
+
+	</section>
+
+
+
+
+	{# {% endminify %}{% endcache %} #}
+{% endblock %}

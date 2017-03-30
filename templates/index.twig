@@ -1,8 +1,31 @@
 {% extends "_layout" %}
-{% set bodyClass = "index" %}
+{% set bodyClass = "forside" %}
 
 {% block content %}
 	{# {% cache until midnight %}{% minify %} #}
-	<h1 style="text-align: center; padding-top: 45vh;">Velkommen til {{siteName}}</h1>
+
+	<section class="forside-wrapper">
+
+		<aside class="textblock">
+			<h1>Tilståelsen</h1>
+			<p>Like før jul i 2005 ble det gjennom media kjent at en person i Trøndelag, Tor Hepsø, kort tid før han avgikk ved døden 20. desember 2005, skulle ha erkjent å stå bak drapene på Sigrid Heggheim og Torunn Finstad. De samme drapene døvstumme Fritz Moen hadde sonet 18 år i fengsel for.</p>
+
+			<nav>
+				<ul class="unstyled">
+					<li><a href="/historien">Historien</a> /</li>
+					<li><a href="/journalistene">Journalistene</a></li>
+				</ul>
+			</nav>
+		</aside>
+
+		<section class="forside-bilde" style="background-image: url('/static/img/Drapsmannen_15l.jpg')">
+
+		</section>
+
+	</section>
+
+
+
+
 	{# {% endminify %}{% endcache %} #}
 {% endblock %}

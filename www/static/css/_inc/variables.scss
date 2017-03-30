@@ -1,8 +1,158 @@
+$desktop-huge: "only screen and (min-width: 1680px)";
 $desktop: "only screen and (min-width: 1025px)";
-$tablet:  "only screen and (min-width: 600px)";
+$tablet:  "only screen and (min-width: 768px)";
 $phone:   "only screen and (max-width: 599px)";
 
-$selectfarge: #ffc53a;
+// FARGEPALETT //
+
+/*-------------------------------
+
+@COLOR AND FONT VARIABLES
+
+------------------------------- */
+
+/* COLOR PALETTE */
+/*-------------*/
+
+$color_pr1: #000000; // Svart
+$color_pr2: #FFFFFF; // Hvit
+$color_pr3: #e0e0e0; // Lys grå
+$color_pr4: #4a436e; // Lilla
+$color_pr5: #8e7268; // Gul-aktig
+$color_pr6: #d4d2c6; // Lys-gul
+
+$selection: $color_pr1;
+
+/* FONT SIZES*/
+/*----------------------------*/
+
+$huge: 42px;
+$h1: 38px;
+$h2: 30px;
+$h3: 24px;
+$h4: 18px;
+$basesize: 16px; 			/* MÅ VÆRE 16px */
+$h5: 14px;
+$h6: 12px;
+$h7: 10px;
+
+/* FONTS FACE VARIABLES */
+/**************************/
+@import url(https://fonts.googleapis.com/css?family=Lato);
+@import url(https://fonts.googleapis.com/css?family=Special+Elite);
+
+// @font-face {font-family: 'AlrightSans';src: url('/dist/fonts/AlrightSans-Bold-v3.eot');src: url('/dist/fonts/AlrightSans-Bold-v3.eot?#iefix') format('embedded-opentype'),url('/dist/fonts/AlrightSans-Bold-v3.woff2') format('woff2'),url('/dist/fonts/AlrightSans-Bold-v3.woff') format('woff'),url('/dist/fonts/AlrightSans-Bold-v3.ttf') format('truetype'),url('/dist/fonts/AlrightSans-Bold-v3.svg#wf') format('svg');}
+//
+// @font-face {font-family: 'AlrightSans';src: url('/dist/fonts/AlrightSans-Regular-v3.eot');src: url('/dist/fonts/AlrightSans-Regular-v3.eot?#iefix') format('embedded-opentype'),url('/dist/fonts/AlrightSans-Regular-v3.woff2') format('woff2'),url('/dist/fonts/AlrightSans-Regular-v3.woff') format('woff'),url('/dist/fonts/AlrightSans-Regular-v3.ttf') format('truetype'),url('/dist/fonts/AlrightSans-Regular-v3.svg#wf') format('svg');}
+
+@font-face {font-family: 'Century';src: url('/dist/fonts/GOTHICB.eot');src: url('/dist/fonts/GOTHICB.eot?#iefix') format('embedded-opentype'),url('/dist/fonts/GOTHICB.woff2') format('woff2'),url('/dist/fonts/GOTHICB.woff') format('woff'),url('/dist/fonts/GOTHICB.ttf') format('truetype'),url('/dist/fonts/GOTHICB.svg#wf') format('svg');}
+//@font-face {font-family: 'Century';src: url('/dist/fonts/GOTHICBI.eot');src: url('/dist/fonts/GOTHICBI.eot?#iefix') format('embedded-opentype'),url('/dist/fonts/GOTHICBI.woff2') format('woff2'),url('/dist/fonts/GOTHICBI.woff') format('woff'),url('/dist/fonts/GOTHICBI.ttf') format('truetype'),url('/dist/fonts/GOTHICBI.svg#wf') format('svg');}
+//@font-face {font-family: 'Century';src: url('/dist/fonts/GOTHICI.eot');src: url('/dist/fonts/GOTHICI.eot?#iefix') format('embedded-opentype'),url('/dist/fonts/GOTHICI.woff2') format('woff2'),url('/dist/fonts/GOTHICI.woff') format('woff'),url('/dist/fonts/GOTHICI.ttf') format('truetype'),url('/dist/fonts/GOTHICI.svg#wf') format('svg');}
+
+
+$font_default: 'Lato', sans-serif;
+$font_slabo: 'Special Elite', cursive;
+//$font_century: 'Century', sans-serif;
+
+
+/* DEFAULT FONT LOOKS AND BEHAVIOUR - MEDIA QUERIES - MOBILE FIRST */
+/*******************************************************************/
+
+h1, h2, h3, h4, h5, h6, b, p, strong, textarea.textarea, a {
+    margin: 0;
+    margin-bottom: .5em;
+    font-weight: normal;
+    font-variant: normal;
+}
+html,
+button,
+input,
+select,
+textarea { font-family: $font_default; }
+
+body {
+    color: #000000;
+    font-size: $h5;
+    background-color: $color_pr3;
+
+	@media #{$tablet} {
+		font-size: $basesize;
+	}
+}
+
+h1,.h1, h2,.h2, h3,.h3, h4,.h4, h5,.h5, h6,.h6 {
+  display: block;
+  font-weight: 400;
+  text-transform: uppercase;
+  font-family: $font_slabo;
+  letter-spacing: .2em;
+}
+
+h1, .h1 {
+    font-size: $h1;
+}
+
+h2, .h2 {
+    font-size: $h3;
+
+	@media #{$tablet} {
+		font-size: $h2;
+	}
+}
+
+h3, .h3 {
+    font-size: $h3;
+}
+
+h4, .h4 {
+    font-size: $h4;
+}
+
+h5, .h5 {
+    font-size:$h5;
+}
+
+h6, .h6 {
+    font-size: $h6;
+}
+
+h7, .h7 {
+    font-size: $h7;
+}
+
+
+b, strong {
+    font-variant:normal;
+    font-weight: 600;
+}
+
+
+/* SELECTION */
+::selection {
+    background: $selection; /* Safari */
+    color: white; }
+
+::-moz-selection {
+    background: $selection; /* Firefox */
+    color: white; }
+
+
+
+/* LINK COLORS */
+a {color: $color_pr1; text-decoration: none}
+a:hover { text-decoration: underline; }
+
+
+.row {
+    max-width: 1360px;
+    margin-left: auto;
+    margin-right: auto;
+
+    @media #{$tablet} {
+
+    }
+}
+
 
 $ease: cubic-bezier(.4, 0, .2, 1);
 $ease-out: cubic-bezier(0, 0, .2, 1);

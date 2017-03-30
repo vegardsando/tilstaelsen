@@ -25,6 +25,31 @@
 		<!--[if lt IE 7]>
 			<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 		<![endif]-->
+
+		{% if bodyClass != 'forside' %}
+			<header id="nav-header">
+				<a href="" id="header-btn">
+					{{craft.inlin.er('/static/svg/symbols/menu-btn.svg') | raw }}
+					{{craft.inlin.er('/static/svg/symbols/menu-btn-close.svg') | raw }}
+				</a>
+
+				<h1>Tilståelsen</h1>
+
+				<nav>
+					<ul class="unstyled">
+						<li><a href="">Hjem</a></li>
+						<li><a href="">Historien</a></li>
+						<li><a href="">Publisert</a></li>
+						<li><a href="">Journalistene</a></li>
+					</ul>
+				</nav>
+
+			</header>
+
+
+
+		{% endif %}
+
 		{% block content %}
 			<p>Du mangler innhold</p>
 		{% endblock %}

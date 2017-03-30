@@ -14,6 +14,7 @@ if (typeof FastClick === 'function') { FastClick.attach(document.body); }
         $window       = $m(window),
         $html         = $m(document.documentElement),
         $document	  = $m(document),
+        $header     = $m('#nav-header'),
         desktop,
 		tablet,
 		phone,
@@ -69,5 +70,13 @@ if (typeof FastClick === 'function') { FastClick.attach(document.body); }
 /*=======================================================
 				  @Click/hover events
 =======================================================*/
+
+
+  $document.on('click', '#header-btn', function (e) {
+    e.preventDefault();
+    console.log('test');
+    $header.toggleClass('nav-open');
+  });
+
 
 }());
