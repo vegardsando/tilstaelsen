@@ -1,0 +1,56 @@
+{% extends "_layout" %}
+{% set bodyClass = "publisert" %}
+
+{% block content %}
+	{# {% cache until midnight %}{% minify %} #}
+
+	<section class="underside-wrapper row">
+		<h2>Publisert</h2>
+
+		<article class="publisert--item">
+			<a href="">
+				<img src="/static/img/Drapsmannen_16.jpg">
+				<div class="publisert--item-overlay">
+					<header>Tittel</header>
+					<span>Publisert: 23.03.2016</span>
+				</div>
+			</a>
+		</article>
+
+		<article class="publisert--item">
+			<a href="">
+				<img src="/static/img/Drapsmannen_15l.jpg">
+				<div class="publisert--item-overlay">
+					<header>Tittel</header>
+					<span>Publisert: 23.03.2016</span>
+				</div>
+			</a>
+		</article>
+
+		<article class="publisert--item">
+			<a href="">
+				<img src="/static/img/Nidarvoll_01.jpg">
+				<div class="publisert--item-overlay">
+					<header>Tittel</header>
+					<span>Publisert: 23.03.2016</span>
+				</div>
+			</a>
+		</article>
+
+		<article class="publisert--item">
+			<a href="">
+				<img src="/static/img/Stavne_sletta_03.jpg">
+				<div class="publisert--item-overlay">
+					<header>Tittel</header>
+					<span>Publisert: 23.03.2016</span>
+				</div>
+			</a>
+		</article>
+
+	</section>
+
+
+
+
+	{# {% endminify %}{% endcache %} #}
+{% endblock %}
