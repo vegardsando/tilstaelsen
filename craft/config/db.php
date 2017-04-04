@@ -19,12 +19,12 @@ $customDbConfig = array(
 		'database' 	=> 'tilstaelsen_craft'
 	),
 	'DEV' => array(
-		'server' 	=> '10.0.0.14',
-		'port' 		=> '8889',
+		'server' 	=> '	mysql02.fastname.no',
+		'port' 		=> '1433',
 		//'port' => '3306',
-		'user' 		=> 'root',
-		'password' 	=> 'root',
-		'database' 	=> '_standard_craft'
+		'user' 		=> 'd302960',
+		'password' 	=> 'hjemmesidehjemmeside',
+		'database' 	=> 'd302960'
 	),
 	'STAGE' => array(
 		'server' 	=> '',

@@ -7,45 +7,24 @@
 	<section class="underside-wrapper row">
 		<h2>Publisert</h2>
 
-		<article class="publisert--item">
-			<a href="">
-				<img src="/static/img/Drapsmannen_16.jpg">
-				<div class="publisert--item-overlay">
-					<header>Tittel</header>
-					<span>Publisert: 23.03.2016</span>
-				</div>
-			</a>
-		</article>
+		{% for artikkel in entry.publisert %}
 
-		<article class="publisert--item">
-			<a href="">
-				<img src="/static/img/Drapsmannen_15l.jpg">
-				<div class="publisert--item-overlay">
-					<header>Tittel</header>
-					<span>Publisert: 23.03.2016</span>
-				</div>
-			</a>
-		</article>
+		{% set img = artikkel.bilde.first | default(false) %}
+		{% set bilde = craft.imager.transformImage(img, [
+			{ width: 400, height: 300 },
+			], { ratio:"16/9" }) %}
 
-		<article class="publisert--item">
-			<a href="">
-				<img src="/static/img/Nidarvoll_01.jpg">
-				<div class="publisert--item-overlay">
-					<header>Tittel</header>
-					<span>Publisert: 23.03.2016</span>
-				</div>
-			</a>
-		</article>
+			<article class="publisert--item">
+				<a href="{{artikkel.lenke}}" target="_blank">
+					<img class="lazyload" src="{{ craft.imager.base64Pixel(16, 9) }}" data-srcset="{{bilde[0].url}}" alt="{{img.title | default("")}}">
+					<div class="publisert--item-overlay">
+						<header>{{artikkel.tittel}}</header>
+						<span>Publisert: {{artikkel.publisert}}</span>
+					</div>
+				</a>
+			</article>
 
-		<article class="publisert--item">
-			<a href="">
-				<img src="/static/img/Stavne_sletta_03.jpg">
-				<div class="publisert--item-overlay">
-					<header>Tittel</header>
-					<span>Publisert: 23.03.2016</span>
-				</div>
-			</a>
-		</article>
+		{% endfor %}
 
 	</section>
 

@@ -7,20 +7,23 @@
 	<section class="underside-wrapper">
 
 		<aside class="textblock">
-			<h1>Tilståelsen</h1>
-			<p>Like før jul i 2005 ble det gjennom media kjent at en person i Trøndelag, Tor Hepsø, kort tid før han avgikk ved døden 20. desember 2005, skulle ha erkjent å stå bak drapene på Sigrid Heggheim og Torunn Finstad. De samme drapene døvstumme Fritz Moen hadde sonet 18 år i fengsel for.</p>
+			{{entry.rikTekst}}
 
 			<nav>
 				<ul class="unstyled">
 					<li><a href="/historien">Historien</a> /</li>
+					<li><a href="/historien">Publisert</a> /</li>
 					<li><a href="/journalistene">Journalistene</a></li>
 				</ul>
 			</nav>
 		</aside>
 
-		<section class="forside-bilde" style="background-image: url('/static/img/Drapsmannen_15l.jpg')">
+		{% set img = entry.bilde.first | default(false) %}
+		{% set bilde = craft.imager.transformImage(img, [
+			{ width: 1280, jpegQuality: 65 },
+			], { ratio:"16/9" }) %}
 
-		</section>
+		<section class="forside-bilde" style="background-image: url('{{bilde[0].url}}')"></section>
 
 	</section>
 
