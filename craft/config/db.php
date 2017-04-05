@@ -19,12 +19,10 @@ $customDbConfig = array(
 		'database' 	=> 'tilstaelsen_craft'
 	),
 	'DEV' => array(
-		'server' 	=> '	mysql02.fastname.no',
-		'port' 		=> '1433',
-		//'port' => '3306',
-		'user' 		=> 'd302960',
-		'password' 	=> 'hjemmesidehjemmeside',
-		'database' 	=> 'd302960'
+		'server' 	=> 'localhost',
+		'user' 		=> 'root',
+		'password' 	=> 'root',
+		'database' 	=> 'tilstaelsen_craft'
 	),
 	'STAGE' => array(
 		'server' 	=> '',
@@ -33,11 +31,12 @@ $customDbConfig = array(
 		'database' 	=> ''
 	),
 	'PROD' => array(
-		'server' 	=> '',
-		'user' 		=> '',
-		'password' 	=> '',
-		'database' 	=> '',
-		//'initSQLs' 	=> array("SET SESSION sql_mode='STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';")
+		'server' 	=> 'mysql02.fastname.no',
+		//'port' 		=> '1433',
+		'user' 		=> 'd302960',
+		'password' 	=> 'hjemmesidehjemmeside',
+		'database' 	=> 'd302960',
+		'initSQLs' 	=> array("SET SESSION sql_mode='STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';")
 	)
 );
 

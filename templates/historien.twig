@@ -33,7 +33,7 @@
 						<img class="lazyload" src="{{ craft.imager.base64Pixel(16, 9) }}" data-srcset="{{bilde_stor[0].url}} 400w, {{bilde_stor[1].url}} 767w, {{bilde_stor[2].url}}" alt="{{img.title | default("")}}">
 				{% endif %}
 
-				{% if bilde == '' and tekst %}
+				{% if bilde == '' and tekst or posisjon == 'full' and tekst %}
 					<div class="mengdetekst full">
 						{{blokk.rikTekst}}
 					</div>

@@ -1,0 +1,35 @@
+2017/04/04 17:46:22 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42000]: Syntax error or access violation: 1055 Expression #22 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'd302960.structureelements.root' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by. The SQL statement executed was: SELECT `elements`.`id`, `elements`.`type`, `elements`.`enabled`, `elements`.`archived`, `elements`.`dateCreated`, `elements`.`dateUpdated`, `elements_i18n`.`slug`, `elements_i18n`.`uri`, `elements_i18n`.`enabled` AS `localeEnabled`, `content`.`id` AS `contentId`, `content`.`title`, `content`.`field_alt`, `content`.`field_fokuspunkt`, `content`.`field_posisjonBilde`, `content`.`field_rikTekst`, `content`.`field_tekst`, `entries`.`sectionId`, `entries`.`typeId`, `entries`.`authorId`, `entries`.`postDate`, `entries`.`expiryDate`, `structureelements`.`root`, `structureelements`.`lft`, `structureelements`.`rgt`, `structureelements`.`level`
+FROM `craft_elements` `elements`
+JOIN `craft_elements_i18n` `elements_i18n` ON elements_i18n.elementId = elements.id
+JOIN `craft_content` `content` ON content.elementId = elements.id
+JOIN `craft_entries` `entries` ON entries.id = elements.id
+JOIN `craft_sections` `sections` ON sections.id = entries.sectionId
+LEFT JOIN `craft_structures` `structures` ON structures.id = sections.structureId
+LEFT JOIN `craft_structureelements` `structureelements` ON (structureelements.structureId = structures.id) AND (structureelements.elementId = entries.id)
+WHERE ((((elements_i18n.locale = :locale) AND (content.locale = :locale)) AND (elements.archived = 0)) AND (`entries`.`sectionId` IN ('1', '2', '4', '3'))) AND ((entries.sectionId=:entriessectionId1) OR (entries.sectionId=:entriessectionId2) OR (entries.sectionId=:entriessectionId3) OR (entries.sectionId=:entriessectionId4))
+GROUP BY `elements`.`id`
+ORDER BY `postDate` DESC LIMIT 50.
+2017/04/04 17:46:22 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42000]: Syntax error or access violation: 1055 Expression #22 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'd302960.structureelements.root' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by' in /home/43/w286699/craft/app/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /home/43/w286699/craft/app/framework/db/CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 /home/43/w286699/craft/app/services/ElementsService.php(219): CDbCommand->queryAll()
+#2 /home/43/w286699/craft/app/models/ElementCriteriaModel.php(277): Craft\ElementsService->findElements(Object(Craft\ElementCriteriaModel))
+#3 /home/43/w286699/craft/app/elementtypes/BaseElementType.php(237): Craft\ElementCriteriaModel->find()
+#4 /home/43/w286699/craft/app/controllers/ElementIndexController.php(374): Craft\BaseElementType->getIndexHtml(Object(Craft\ElementCriteriaModel), Array, Array, '*', 'index', true, true)
+#5 /home/43/w286699/craft/app/controllers/ElementIndexController.php(105): Craft\ElementIndexController->_getElementResponseData(true, true)
+#6 /home/43/w286699/craft/app/framework/web/actions/CInlineAction.php(49): Craft\ElementIndexController->actionGetElements()
+#7 /home/43/w286699/craft/app/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#8 /home/43/w286699/craft/app/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#9 /home/43/w286699/craft/app/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 /home/43/w286699/craft/app/framework/web/CWebApplication.php(282): CController->run('getElements')
+#11 /home/43/w286699/craft/app/etc/web/WebApp.php(817): CWebApplication->runController('elementIndex/ge...')
+#12 /home/43/w286699/craft/app/etc/web/WebApp.php(287): Craft\WebApp->_processActionRequest()
+#13 /home/43/w286699/craft/app/framework/base/CApplication.php(185): Craft\WebApp->processRequest()
+#14 /home/43/w286699/craft/app/index.php(62): CApplication->run()
+#15 /home/43/w286699/www/index.php(45): require_once('/home/43/w28669...')
+#16 {main}
+REQUEST_URI=/index.php/admin/actions/elementIndex/getElements
+HTTP_REFERER=http://xn--tilstelsen-55a.no/admin/entries
+---
+
+******************************************************************************************************
